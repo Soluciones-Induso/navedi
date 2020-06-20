@@ -110,7 +110,7 @@ public class RequestTable extends DisplayTable implements Themeable {
                 case CALL:
                     if (label.getText().isEmpty() && request.isInitialConnect()) {
                         //only time call can be empty is when setting up the connection
-                        label.setText("connect");
+                        label.setText("conectar");
                     }
                     break;
                 case PARAMS:
@@ -127,10 +127,10 @@ public class RequestTable extends DisplayTable implements Themeable {
 
                     if (label.getText().isEmpty()) {
                         if (request.isInitialConnect()) {
-                            label.setText("Not Required");
+                            label.setText("No Requerido");
                             style = STATUS_NORMAL;
                         } else {
-                            label.setText("Missing");
+                            label.setText("No existe");
                         }
                     }
                     break;

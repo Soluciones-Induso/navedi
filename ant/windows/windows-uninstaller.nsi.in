@@ -25,18 +25,18 @@
 
 !define MUI_PAGE_HEADER_TEXT "Uninstall ${project.name}"
 !define MUI_PAGE_HEADER_SUBTEXT "Remove ${project.name} from your computer"
-!define MUI_INSTFILESPAGE_FINISHHEADER_TEXT "Uninstallation Complete"
-!define MUI_INSTFILESPAGE_FINISHHEADER_SUBTEXT "Uninstall was completed successfully."
+!define MUI_INSTFILESPAGE_FINISHHEADER_TEXT "Desinstalación completa"
+!define MUI_INSTFILESPAGE_FINISHHEADER_SUBTEXT "La desinstalación se completó exitosamente."
 
 !insertmacro MUI_PAGE_INSTFILES
-!insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "Spanish"
 !insertmacro GetParameters
 
 RequestExecutionLevel admin
 CRCCheck On
 
-Name "Uninstall ${project.name}"
-Caption "Uninstall ${project.name}"
+Name "Desinstalar ${project.name}"
+Caption "Desinstalar ${project.name}"
 Icon "${basedir}/ant/windows/nsis/uninstall.ico"
 OutFile "${nsis.outfile}"
 
@@ -45,9 +45,9 @@ Var /GLOBAL DELETE_DIR
 Var /GLOBAL DELETE_EXE
 
 Section
-  ${SetTitlebar} "Uninstall"
+  ${SetTitlebar} "Desinstalar"
   SetDetailsPrint textonly
-  DetailPrint "Uninstalling"
+  DetailPrint "Desinstalando"
   SetDetailsPrint listonly
 
   ${GetParameters} $0
@@ -68,20 +68,20 @@ Section
 
     ; Run uninstall step using jar
     SetDetailsPrint textonly
-    DetailPrint "Running uninstall..."
+    DetailPrint "Ejecutando la desinstalación..."
     SetDetailsPrint none ; Temporarily suppress details
     SetOutPath $DELETE_DIR
     SetDetailsPrint listonly
-    DetailPrint 'Running uninstall: "$java" ${launch.opts} -jar "$DELETE_DIR\${project.filename}.jar" uninstall'
+    DetailPrint 'Ejecutando la desinstalación: "$java" ${launch.opts} -jar "$DELETE_DIR\${project.filename}.jar" uninstall'
     ClearErrors
     nsExec::ExecToLog '"$java" ${launch.opts} -jar "$DELETE_DIR\${project.filename}.jar" uninstall'
     Pop $0
     ${If} "$0" != "0"
-        Abort "Uninstall failed."
+        Abort "La desinstalación falló."
     ${EndIf}
 
     ; Remove all files
-    DetailPrint "Removing remaining files..."
+    DetailPrint "Removiendo archivos..."
     SetDetailsPrint none ; Temporarily suppress details
     SetOutPath $TEMP
     RMDir /r "$DELETE_DIR"

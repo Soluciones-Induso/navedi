@@ -20,6 +20,15 @@ public class CRL {
 
     /** The URL to the QZ CRL. Should not be changed except for dev tests */
     public static final String CRL_URL = "https://crl.qz.io";
+    // Contenido de ejemplo
+    
+    // # QZ Industries, LLC
+    // #
+    // # Certificate Revocation List
+    // # Used by QZ Tray software
+
+    // # Sample (SHA-1 hash, no spaces):
+    // # 585acc6ca68cd4d46b1e92abe033527628ad04ff
 
     private static CRL instance = null;
 

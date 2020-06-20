@@ -48,7 +48,7 @@ public class LogDialog extends BasicDialog {
         logArea.setWrapStyleWord(true);
 
         // TODO:  Fix button panel resizing issues
-        clearButton = addPanelButton("Clear", IconCache.Icon.DELETE_ICON, KeyEvent.VK_L);
+        clearButton = addPanelButton("Limpiar", IconCache.Icon.DELETE_ICON, KeyEvent.VK_L);
         clearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

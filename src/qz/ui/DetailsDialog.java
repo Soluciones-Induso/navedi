@@ -26,13 +26,13 @@ public class DetailsDialog extends JPanel {
     }
 
     private void initComponents(IconCache iconCache) {
-        requestLabel = new JLabel("Request");
+        requestLabel = new JLabel("Petición");
         requestLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         requestTable = new RequestTable(iconCache);
         reqScrollPane = new JScrollPane(requestTable);
 
-        certLabel = new JLabel("Certificate");
+        certLabel = new JLabel("Certificado");
         certLabel.setAlignmentX(CENTER_ALIGNMENT);
 
         certTable = new CertificateTable(iconCache);

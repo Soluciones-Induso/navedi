@@ -21,36 +21,36 @@ public class Constants {
     public static final String ALLOW_FILE = "allowed";
     public static final String TEMP_FILE = "temp";
     public static final String LOG_FILE = "debug";
-    public static final String PROPS_FILE = "qz-tray"; // .properties extension is assumed
+    public static final String PROPS_FILE = "navedi"; // .properties extension is assumed
     public static final String PREFS_FILE = "prefs"; // .properties extension is assumed
     public static final String[] PERSIST_PROPS = { "file.whitelist" };
     public static final String AUTOSTART_FILE = ".autostart";
-    public static final String DATA_DIR = "qz";
+    public static final String DATA_DIR = "navedi";
     public static final int LOG_SIZE = 524288;
     public static final int LOG_ROTATIONS = 5;
 
     public static final int BORDER_PADDING = 10;
 
-    public static final String ABOUT_TITLE = "QZ Tray";
-    public static final String ABOUT_EMAIL = "support@qz.io";
-    public static final String ABOUT_URL = "https://qz.io";
-    public static final String ABOUT_COMPANY = "QZ Industries, LLC";
-    public static final String ABOUT_CITY = "Canastota";
-    public static final String ABOUT_STATE = "NY";
-    public static final String ABOUT_COUNTRY = "US";
+    public static final String ABOUT_TITLE = "Navedi";
+    public static final String ABOUT_EMAIL = "soporte@contica.app";
+    public static final String ABOUT_URL = "https://solucionesinduso.com/navedi";
+    public static final String ABOUT_COMPANY = "Soluciones Induso";
+    public static final String ABOUT_CITY = "San Vito";
+    public static final String ABOUT_STATE = "Puntarenas";
+    public static final String ABOUT_COUNTRY = "Costa Rica";
 
     public static final String ABOUT_LICENSING_URL = Constants.ABOUT_URL + "/licensing";
     public static final String ABOUT_SUPPORT_URL = Constants.ABOUT_URL + "/support";
     public static final String ABOUT_PRIVACY_URL = Constants.ABOUT_URL + "/privacy";
     public static final String ABOUT_DOWNLOAD_URL = Constants.ABOUT_URL + "/download";
 
-    public static final String VERSION_CHECK_URL = "https://api.github.com/repos/qzind/tray/releases";
-    public static final String VERSION_DOWNLOAD_URL = "https://github.com/qzind/tray/releases";
+    public static final String VERSION_CHECK_URL = "https://api.github.com/repos/Soluciones-Induso/navedi/releases";
+    public static final String VERSION_DOWNLOAD_URL = "https://github.com/Soluciones-Induso/navedi/releases";
     public static final boolean ENABLE_DIAGNOSTICS = true; // Diagnostics menu (logs, etc)
 
-    public static final String TRUSTED_CERT = String.format("Verified by %s", Constants.ABOUT_COMPANY);
-    public static final String UNTRUSTED_CERT = "Untrusted website";
-    public static final String NO_TRUST = "Cannot verify trust";
+    public static final String TRUSTED_CERT = String.format("Verificado por %s", Constants.ABOUT_COMPANY);
+    public static final String UNTRUSTED_CERT = "Sitio web sin confianza";
+    public static final String NO_TRUST = "No se puede verificar si es de confianza";
 
     public static final String PROBE_REQUEST = "getProgramName";
     public static final String PROBE_RESPONSE = ABOUT_TITLE;
@@ -59,14 +59,14 @@ public class Constants {
     public static final String PREFS_HEADLESS = "tray.headless";
     public static final String PREFS_MONOCLE = "tray.monocle";
 
-    public static final String WHITE_LIST = "Permanently allowed \"%s\" to access local resources";
-    public static final String BLACK_LIST = "Permanently blocked \"%s\" from accessing local resources";
+    public static final String WHITE_LIST = "Se le otorgó a \"%s\" acceso permanente a los recursos locales";
+    public static final String BLACK_LIST = "Se le denegó permanentemente a \"%s\" el acceso a los recursos locales";
 
-    public static final String WHITE_SITES = "Sites permanently allowed access";
-    public static final String BLACK_SITES = "Sites permanently blocked from access";
+    public static final String WHITE_SITES = "Sitios con acceso permitido permanentemente";
+    public static final String BLACK_SITES = "Sitios con acceso denegado permanentemente";
 
-    public static final String ALLOWED = "Allowed";
-    public static final String BLOCKED = "Blocked";
+    public static final String ALLOWED = "Permitido";
+    public static final String BLOCKED = "Denegado";
 
     public static final String OVERRIDE_CERT = "override.crt";
     public static final String WHITELIST_CERT_DIR = "whitelist";

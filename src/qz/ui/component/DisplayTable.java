@@ -25,8 +25,8 @@ public class DisplayTable extends JTable {
             @Override
             public boolean isCellEditable(int x, int y) { return false; }
         };
-        model.addColumn("Field");
-        model.addColumn("Value");
+        model.addColumn("Campo");
+        model.addColumn("Valor");
 
         getTableHeader().setReorderingAllowed(false);
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

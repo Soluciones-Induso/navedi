@@ -45,7 +45,7 @@ public class HttpAboutServlet extends DefaultServlet {
         StringBuilder display = new StringBuilder();
 
         display.append("<html><body>")
-                .append("<h1>About</h1>");
+                .append("<h1>Acerca de</h1>");
 
         display.append(newTable());
 
@@ -122,7 +122,7 @@ public class HttpAboutServlet extends DefaultServlet {
                 rows.append(generateFromKeys(obj.getJSONObject(key), false));
             } else {
                 if ("data".equals(key)) { //special case - replace with a "Download" button
-                    obj.put(key, "<a href='/cert/" + obj.optString("alias") + "'>Download certificate</a>");
+                    obj.put(key, "<a href='/cert/" + obj.optString("alias") + "'>Descargar certificado</a>");
                 }
                 rows.append(contentRow(key, obj.get(key)));
             }

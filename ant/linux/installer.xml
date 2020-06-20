@@ -1,5 +1,5 @@
 <project name="linux-installer" basedir="../../">
-    <property file="ant/project.properties"/>
+    <property file="${basedir}/ant/project.properties"/>
     <import file="${basedir}/ant/version.xml"/>
 
     <!-- Inform javafx.xml -->

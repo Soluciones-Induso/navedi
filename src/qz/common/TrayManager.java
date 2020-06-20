@@ -143,11 +143,11 @@ public class TrayManager {
             componentList = new ArrayList<>();
 
             // The allow/block dialog
-            gatewayDialog = new GatewayDialog(null, "Action Required", iconCache);
+            gatewayDialog = new GatewayDialog(null, "Acción requerida", iconCache);
             componentList.add(gatewayDialog);
 
             // The ok/cancel dialog
-            confirmDialog = new ConfirmDialog(null, "Please Confirm", iconCache);
+            confirmDialog = new ConfirmDialog(null, "Por favor confirme", iconCache);
             componentList.add(confirmDialog);
 
             // Detect theme changes
@@ -204,31 +204,31 @@ public class TrayManager {
         JPopupMenu popup = new JPopupMenu();
         componentList.add(popup);
 
-        JMenu advancedMenu = new JMenu("Advanced");
+        JMenu advancedMenu = new JMenu("Avanzado");
         advancedMenu.setMnemonic(KeyEvent.VK_A);
         advancedMenu.setIcon(iconCache.getIcon(IconCache.Icon.SETTINGS_ICON));
 
-        JMenuItem sitesItem = new JMenuItem("Site Manager...", iconCache.getIcon(IconCache.Icon.SAVED_ICON));
+        JMenuItem sitesItem = new JMenuItem("Configurar sitios...", iconCache.getIcon(IconCache.Icon.SAVED_ICON));
         sitesItem.setMnemonic(KeyEvent.VK_M);
         sitesItem.addActionListener(savedListener);
         sitesDialog = new SiteManagerDialog(sitesItem, iconCache);
         componentList.add(sitesDialog);
 
-        JMenuItem diagnosticMenu = new JMenu("Diagnostic");
+        JMenuItem diagnosticMenu = new JMenu("Diagnóstico");
 
-        JMenuItem browseApp = new JMenuItem("Browse App folder...", iconCache.getIcon(IconCache.Icon.FOLDER_ICON));
+        JMenuItem browseApp = new JMenuItem("Navegar carpeta de app...", iconCache.getIcon(IconCache.Icon.FOLDER_ICON));
         browseApp.setToolTipText(FileUtilities.getParentDirectory(SystemUtilities.getJarPath()));
         browseApp.setMnemonic(KeyEvent.VK_O);
         browseApp.addActionListener(e -> ShellUtilities.browseAppDirectory());
         diagnosticMenu.add(browseApp);
 
-        JMenuItem browseUser = new JMenuItem("Browse User folder...", iconCache.getIcon(IconCache.Icon.FOLDER_ICON));
+        JMenuItem browseUser = new JMenuItem("Navegar carpeta de usuario...", iconCache.getIcon(IconCache.Icon.FOLDER_ICON));
         browseUser.setToolTipText(FileUtilities.USER_DIR.toString());
         browseUser.setMnemonic(KeyEvent.VK_U);
         browseUser.addActionListener(e -> ShellUtilities.browseDirectory(FileUtilities.USER_DIR));
         diagnosticMenu.add(browseUser);
 
-        JMenuItem browseShared = new JMenuItem("Browse Shared folder...", iconCache.getIcon(IconCache.Icon.FOLDER_ICON));
+        JMenuItem browseShared = new JMenuItem("Navegar carpeta compartida...", iconCache.getIcon(IconCache.Icon.FOLDER_ICON));
         browseShared.setToolTipText(FileUtilities.SHARED_DIR.toString());
         browseShared.setMnemonic(KeyEvent.VK_S);
         browseShared.addActionListener(e -> ShellUtilities.browseDirectory(FileUtilities.SHARED_DIR));
@@ -236,15 +236,15 @@ public class TrayManager {
 
         diagnosticMenu.add(new JSeparator());
 
-        JCheckBoxMenuItem notificationsItem = new JCheckBoxMenuItem("Show all notifications");
-        notificationsItem.setToolTipText("Shows all connect/disconnect messages, useful for debugging purposes");
+        JCheckBoxMenuItem notificationsItem = new JCheckBoxMenuItem("Mostrar todas las notificaciones");
+        notificationsItem.setToolTipText("Muestra todos los mensajes de conexión/desconexión. Útil para depurar.");
         notificationsItem.setMnemonic(KeyEvent.VK_S);
         notificationsItem.setState(prefs.getBoolean(Constants.PREFS_NOTIFICATIONS, false));
         notificationsItem.addActionListener(notificationsListener);
         diagnosticMenu.add(notificationsItem);
 
-        JCheckBoxMenuItem monocleItem = new JCheckBoxMenuItem("Use Monocle for HTML");
-        monocleItem.setToolTipText("Use monocle platform for HTML printing (restart required)");
+        JCheckBoxMenuItem monocleItem = new JCheckBoxMenuItem("Usar Monocle para HTML");
+        monocleItem.setToolTipText("Usar la plataforma Monocle para la impresión de HTML (requiere reinicio)");
         monocleItem.setMnemonic(KeyEvent.VK_U);
         monocleItem.setState(prefs.getBoolean(Constants.PREFS_MONOCLE, true));
         monocleItem.addActionListener(monocleListener);
@@ -255,25 +255,25 @@ public class TrayManager {
 
         diagnosticMenu.add(new JSeparator());
 
-        JMenuItem logItem = new JMenuItem("View logs (live feed)...", iconCache.getIcon(IconCache.Icon.LOG_ICON));
+        JMenuItem logItem = new JMenuItem("Ver registros (en vivo)...", iconCache.getIcon(IconCache.Icon.LOG_ICON));
         logItem.setMnemonic(KeyEvent.VK_L);
         logItem.addActionListener(logListener);
         diagnosticMenu.add(logItem);
         logDialog = new LogDialog(logItem, iconCache);
         componentList.add(logDialog);
 
-        JMenuItem zipLogs = new JMenuItem("Zip logs (to Desktop)");
-        zipLogs.setToolTipText("Zip diagnostic logs, place on Desktop");
+        JMenuItem zipLogs = new JMenuItem("Comprimir registros (al Escritorio)");
+        zipLogs.setToolTipText("Comprimir registros, y guardar en el Escritorio");
         zipLogs.setMnemonic(KeyEvent.VK_Z);
         zipLogs.addActionListener(e -> FileUtilities.zipLogs());
         diagnosticMenu.add(zipLogs);
 
-        JMenuItem desktopItem = new JMenuItem("Create Desktop shortcut", iconCache.getIcon(IconCache.Icon.DESKTOP_ICON));
+        JMenuItem desktopItem = new JMenuItem("Crear acceso directo en el Escritorio", iconCache.getIcon(IconCache.Icon.DESKTOP_ICON));
         desktopItem.setMnemonic(KeyEvent.VK_D);
         desktopItem.addActionListener(desktopListener());
 
-        anonymousItem = new JCheckBoxMenuItem("Block anonymous requests");
-        anonymousItem.setToolTipText("Blocks all requests that do not contain a valid certificate/signature");
+        anonymousItem = new JCheckBoxMenuItem("Bloquear peticiones anónimas");
+        anonymousItem.setToolTipText("Bloquear todas las peticiones que no contienen un certificado/firma válido");
         anonymousItem.setMnemonic(KeyEvent.VK_K);
         anonymousItem.setState(Certificate.UNKNOWN.isBlocked());
         anonymousItem.addActionListener(anonymousListener);
@@ -287,11 +287,11 @@ public class TrayManager {
         advancedMenu.add(new JSeparator());
         advancedMenu.add(anonymousItem);
 
-        JMenuItem reloadItem = new JMenuItem("Reload", iconCache.getIcon(IconCache.Icon.RELOAD_ICON));
+        JMenuItem reloadItem = new JMenuItem("Recargar", iconCache.getIcon(IconCache.Icon.RELOAD_ICON));
         reloadItem.setMnemonic(KeyEvent.VK_R);
         reloadItem.addActionListener(reloadListener);
 
-        JMenuItem aboutItem = new JMenuItem("About...", iconCache.getIcon(IconCache.Icon.ABOUT_ICON));
+        JMenuItem aboutItem = new JMenuItem("Acerca de...", iconCache.getIcon(IconCache.Icon.ABOUT_ICON));
         aboutItem.setMnemonic(KeyEvent.VK_B);
         aboutItem.addActionListener(aboutListener);
         aboutDialog = new AboutDialog(aboutItem, iconCache);
@@ -304,17 +304,17 @@ public class TrayManager {
 
         JSeparator separator = new JSeparator();
 
-        JCheckBoxMenuItem startupItem = new JCheckBoxMenuItem("Automatically start");
+        JCheckBoxMenuItem startupItem = new JCheckBoxMenuItem("Iniciar automáticamente");
         startupItem.setMnemonic(KeyEvent.VK_S);
         startupItem.setState(FileUtilities.isAutostart());
         startupItem.addActionListener(startupListener());
         if (!shortcutCreator.canAutoStart()) {
             startupItem.setEnabled(false);
             startupItem.setState(false);
-            startupItem.setToolTipText("Autostart has been disabled by the administrator");
+            startupItem.setToolTipText("Inicio automático ha sido deshabilitado por el administrador");
         }
 
-        JMenuItem exitItem = new JMenuItem("Exit", iconCache.getIcon(IconCache.Icon.EXIT_ICON));
+        JMenuItem exitItem = new JMenuItem("Salir", iconCache.getIcon(IconCache.Icon.EXIT_ICON));
         exitItem.addActionListener(exitListener);
 
         popup.add(advancedMenu);
@@ -342,8 +342,8 @@ public class TrayManager {
         public void actionPerformed(ActionEvent e) {
             JCheckBoxMenuItem j = (JCheckBoxMenuItem)e.getSource();
             prefs.setProperty(Constants.PREFS_MONOCLE, j.getState());
-            displayWarningMessage(String.format("A restart of %s is required to ensure this feature is %sabled.",
-                                                Constants.ABOUT_TITLE, j.getState()? "en":"dis"));
+            displayWarningMessage(String.format("Un reinicio de %s es requerido para asegurarse que esta función sea %habilitada.",
+                                                Constants.ABOUT_TITLE, j.getState()? "":"des"));
         }
     };
 
@@ -384,14 +384,14 @@ public class TrayManager {
     private ActionListener startupListener() {
         return e -> {
             JCheckBoxMenuItem source = (JCheckBoxMenuItem)e.getSource();
-            if (!source.getState() && !confirmDialog.prompt("Remove " + name + " from startup?")) {
+            if (!source.getState() && !confirmDialog.prompt("¿Quitar " + name + " del inicio automático?")) {
                 source.setState(true);
                 return;
             }
             if (FileUtilities.setAutostart(source.getState())) {
-                displayInfoMessage("Successfully " + (source.getState() ? "enabled" : "disabled") + " autostart");
+                displayInfoMessage("Inicio automático se " + (source.getState() ? "habilitó" : "deshabilitó") + " exitosamente");
             } else {
-                displayErrorMessage("Error " + (source.getState() ? "enabling" : "disabling") + " autostart");
+                displayErrorMessage("Error al " + (source.getState() ? "habilitar" : "deshabilitar") + " inicio automático");
             }
             source.setState(FileUtilities.isAutostart());
         };
@@ -444,7 +444,7 @@ public class TrayManager {
     public boolean showGatewayDialog(final RequestState request, final String prompt, final Point position) {
         if (!headless) {
             try {
-                SwingUtilities.invokeAndWait(() -> gatewayDialog.prompt("%s wants to " + prompt, request, position));
+                SwingUtilities.invokeAndWait(() -> gatewayDialog.prompt("%s quiere " + prompt, request, position));
             }
             catch(Exception ignore) {}
 
@@ -474,7 +474,7 @@ public class TrayManager {
         if (FileUtilities.printLineToFile(Constants.ALLOW_FILE, cert.data())) {
             displayInfoMessage(String.format(Constants.WHITE_LIST, cert.getOrganization()));
         } else {
-            displayErrorMessage("Failed to write to file (Insufficient user privileges)");
+            displayErrorMessage("Ocurrió un error al escribir al archivo (Privilegios de usuario insuficientes)");
         }
     }
 
@@ -482,7 +482,7 @@ public class TrayManager {
         if (FileUtilities.printLineToFile(Constants.BLOCK_FILE, cert.data())) {
             displayInfoMessage(String.format(Constants.BLACK_LIST, cert.getOrganization()));
         } else {
-            displayErrorMessage("Failed to write to file (Insufficient user privileges)");
+            displayErrorMessage("Ocurrió un error al escribir al archivo (Privilegios de usuario insuficientes)");
         }
     }
 

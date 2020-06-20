@@ -4,7 +4,7 @@
 set -e
 
 if [ "$(id -u)" != "0" ]; then
-   echo "This script must be run with root (sudo) privileges" 1>&2
+   echo "Este programa necesita ser ejecutado con privilegios de super usuario (sudo)" 1>&2
    exit 1
 fi
 
@@ -18,10 +18,10 @@ WARNING="   [${YELLOW}warning${PLAIN}]"
 
 mask=755
 
-echo -e "Starting install...\n"
+echo -e "Comenzando la instalación...\n"
 
 run_task () {
-    echo -e "Running $1 task..."
+    echo -e "Ejecutando la tarea $1..."
     if [ -n "$DEBUG" ]; then
         "./${project.filename}" $@ && ret_val=$? || ret_val=$?
     else
@@ -29,13 +29,13 @@ run_task () {
     fi
 
     if [ $ret_val -eq 0 ]; then
-        echo -e "   $SUCCESS Task $1 was successful"
+        echo -e "   $SUCCESS Tarea $1 fue exitosa"
     else
         if [ "$1" == "spawn" ]; then
-            echo -e "   $WARNING Task $1 skipped.  You'll have to start ${project.name} manually."
+            echo -e "   $WARNING Tarea $1 brincada.  Vas a tener que ejecutar ${project.name} manualmente."
             return
         fi
-        echo -e "   $FAILURE Task $1 failed.\n\nRe-run with DEBUG=true for more information."
+        echo -e "   $FAILURE Tarea $1 falló.\n\nVuelva a ejecutar con DEBUG=true para más información."
         false # throw error
     fi
 }
@@ -55,7 +55,7 @@ umask 0002 # more permissive umask for mimetype registration
 update-desktop-database &> /dev/null &
 umask "$umask_bak"
 
-echo "Installation complete... Starting ${project.name}..."
+echo "Instalación completa... Ejecutando ${project.name}..."
 # spawn itself as a regular user, inheriting environment
 run_task spawn "/opt/${project.filename}/${project.filename}"
 

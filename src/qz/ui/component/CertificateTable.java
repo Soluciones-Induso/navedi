@@ -20,12 +20,12 @@ public class CertificateTable extends DisplayTable implements Themeable {
      * Certificate fields to be displayed (and the corresponding function to Reflect upon)
      */
     enum CertificateField {
-        ORGANIZATION("Organization", "getOrganization"),
-        COMMON_NAME("Common Name", "getCommonName"),
-        TRUSTED("Trusted", "isTrusted"),
-        VALID_FROM("Valid From", "getValidFrom"),
-        VALID_TO("Valid To", "getValidTo"),
-        FINGERPRINT("Fingerprint", "getFingerprint");
+        ORGANIZATION("Organización", "getOrganization"),
+        COMMON_NAME("Nombre Común", "getCommonName"),
+        TRUSTED("Confianza", "isTrusted"),
+        VALID_FROM("Válido desde", "getValidFrom"),
+        VALID_TO("Válido hasta", "getValidTo"),
+        FINGERPRINT("Huella", "getFingerprint");
 
         String description;
         String callBack;
@@ -143,7 +143,7 @@ public class CertificateTable extends DisplayTable implements Themeable {
                 case VALID_TO:
                     boolean expiresSoon = cert.getValidToDate().isBefore(warn);
                     boolean expired = cert.getValidToDate().isBefore(now);
-                    String reason = expired? "expired":(expiresSoon? "expires soon":null);
+                    String reason = expired? "expirado":(expiresSoon? "expira pronto":null);
                     return stylizeLabel(expiresSoon || expired? STATUS_WARNING:STATUS_NORMAL, label, isSelected, reason);
                 default:
                     return stylizeLabel(STATUS_NORMAL, label, isSelected);

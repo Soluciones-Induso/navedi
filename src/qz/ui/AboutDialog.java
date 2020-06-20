@@ -61,7 +61,7 @@ public class AboutDialog extends BasicDialog implements Themeable {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 
-        LinkLabel linkLibrary = new LinkLabel("Detailed library information");
+        LinkLabel linkLibrary = new LinkLabel("Información detallada sobre la librería");
         if(server.isRunning() && !server.isStopping()) {
             linkLibrary.setLinkLocation(String.format("%s://%s:%s", server.getURI().getScheme(), AboutInfo.getPreferredHostname(), server.getURI().getPort()));
         }
@@ -76,7 +76,7 @@ public class AboutDialog extends BasicDialog implements Themeable {
         aboutPanel.add(logo);
 
         if (!limitedDisplay) {
-            LinkLabel linkNew = new LinkLabel("What's New?");
+            LinkLabel linkNew = new LinkLabel("¿Qué hay de nuevo?");
             linkNew.setLinkLocation(Constants.VERSION_DOWNLOAD_URL);
 
             lblUpdate = new JLabel();
@@ -97,9 +97,9 @@ public class AboutDialog extends BasicDialog implements Themeable {
             infoPanel.add(lblUpdate);
             infoPanel.add(updateButton);
             infoPanel.add(Box.createVerticalGlue());
-            infoPanel.add(new TextWrapLabel(String.format("%s is written and supported by %s.", Constants.ABOUT_TITLE, Constants.ABOUT_COMPANY)));
+            infoPanel.add(new TextWrapLabel(String.format("%s está escrito y soportado por %s.", Constants.ABOUT_TITLE, Constants.ABOUT_COMPANY)));
             infoPanel.add(Box.createVerticalGlue());
-            infoPanel.add(new TextWrapLabel(String.format("If using %s commercially, please first reach out to the website publisher for support issues.", Constants.ABOUT_TITLE)));
+            infoPanel.add(new TextWrapLabel(String.format("Si está usando %s comercialmente, por favor contacte primero al publicador del sitio web para asuntos de soporte.", Constants.ABOUT_TITLE)));
             infoPanel.add(Box.createVerticalGlue());
             infoPanel.add(linkLibrary);
             infoPanel.setPreferredSize(logo.getPreferredSize());
@@ -126,13 +126,13 @@ public class AboutDialog extends BasicDialog implements Themeable {
         panel.add(new JSeparator());
 
         if (!limitedDisplay) {
-            LinkLabel lblLicensing = new LinkLabel("Licensing Information", 0.9f, false);
+            LinkLabel lblLicensing = new LinkLabel("Información de la licencia", 0.9f, false);
             lblLicensing.setLinkLocation(Constants.ABOUT_LICENSING_URL);
 
-            LinkLabel lblSupport = new LinkLabel("Support Information", 0.9f, false);
+            LinkLabel lblSupport = new LinkLabel("Información de soporte", 0.9f, false);
             lblSupport.setLinkLocation(Constants.ABOUT_SUPPORT_URL);
 
-            LinkLabel lblPrivacy = new LinkLabel("Privacy Policy", 0.9f, false);
+            LinkLabel lblPrivacy = new LinkLabel("Política de privacidad", 0.9f, false);
             lblPrivacy.setLinkLocation(Constants.ABOUT_PRIVACY_URL);
 
             JPanel supportPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 80, 10));
@@ -149,17 +149,17 @@ public class AboutDialog extends BasicDialog implements Themeable {
     private void checkForUpdate() {
         Version latestVersion = AboutInfo.findLatestVersion();
         if (latestVersion.greaterThan(Constants.VERSION)) {
-            lblUpdate.setText("An update is available:");
+            lblUpdate.setText("Hay una actualización disponible:");
 
-            updateButton.setText("Download " + latestVersion.toString());
+            updateButton.setText("Descargar " + latestVersion.toString());
             updateButton.setVisible(true);
         } else if (latestVersion.lessThan(Constants.VERSION)) {
-            lblUpdate.setText("You are on a beta release.");
+            lblUpdate.setText("Estás en una versión beta.");
 
-            updateButton.setText("Revert to stable " + latestVersion.toString());
+            updateButton.setText("Revertir a la versión estable " + latestVersion.toString());
             updateButton.setVisible(true);
         } else {
-            lblUpdate.setText("You have the latest version.");
+            lblUpdate.setText("Usted tiene la última versión.");
 
             updateButton.setVisible(false);
         }

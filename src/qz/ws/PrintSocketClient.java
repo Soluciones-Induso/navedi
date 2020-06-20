@@ -47,40 +47,40 @@ public class PrintSocketClient {
     private static final HashMap<Integer,SocketConnection> openConnections = new HashMap<>();
 
     private enum Method {
-        PRINTERS_GET_DEFAULT("printers.getDefault", true, "access connected printers"),
-        PRINTERS_FIND("printers.find", true, "access connected printers"),
-        PRINTERS_DETAIL("printers.detail", true, "access connected printers"),
-        PRINTERS_START_LISTENING("printers.startListening", true, "listen for printer status"),
+        PRINTERS_GET_DEFAULT("printers.getDefault", true, "acceder a las impresoras conectadas"),
+        PRINTERS_FIND("printers.find", true, "acceder a las impresoras conectadas"),
+        PRINTERS_DETAIL("printers.detail", true, "acceder a las impresoras conectadas"),
+        PRINTERS_START_LISTENING("printers.startListening", true, "escuchar el estado de la impresora"),
         PRINTERS_GET_STATUS("printers.getStatus", false),
         PRINTERS_STOP_LISTENING("printers.stopListening", false),
-        PRINT("print", true, "print to %s"),
+        PRINT("print", true, "imprimir a %s"),
 
-        SERIAL_FIND_PORTS("serial.findPorts", true, "access serial ports"),
-        SERIAL_OPEN_PORT("serial.openPort", true, "open a serial port"),
-        SERIAL_SEND_DATA("serial.sendData", true, "send data over a serial port"),
-        SERIAL_CLOSE_PORT("serial.closePort", true, "close a serial port"),
+        SERIAL_FIND_PORTS("serial.findPorts", true, "acceder a los puertos serie"),
+        SERIAL_OPEN_PORT("serial.openPort", true, "abrir un puerto serie"),
+        SERIAL_SEND_DATA("serial.sendData", true, "enviar información a través de un puerto serie"),
+        SERIAL_CLOSE_PORT("serial.closePort", true, "cerrar un puerto serie"),
 
-        USB_LIST_DEVICES("usb.listDevices", true, "access USB devices"),
-        USB_LIST_INTERFACES("usb.listInterfaces", true, "access USB devices"),
-        USB_LIST_ENDPOINTS("usb.listEndpoints", true, "access USB devices"),
-        USB_CLAIM_DEVICE("usb.claimDevice", true, "claim a USB device"),
-        USB_CLAIMED("usb.isClaimed", false, "check USB claim status"),
-        USB_SEND_DATA("usb.sendData", true, "use a USB device"),
-        USB_READ_DATA("usb.readData", true, "use a USB device"),
-        USB_OPEN_STREAM("usb.openStream", true, "use a USB device"),
-        USB_CLOSE_STREAM("usb.closeStream", false, "use a USB device"),
+        USB_LIST_DEVICES("usb.listDevices", true, "acceder a los dispositivos USB"),
+        USB_LIST_INTERFACES("usb.listInterfaces", true, "acceder a los dispositivos USB"),
+        USB_LIST_ENDPOINTS("usb.listEndpoints", true, "acceder a los dispositivos USB"),
+        USB_CLAIM_DEVICE("usb.claimDevice", true, "reclamar un dispositivo USB"),
+        USB_CLAIMED("usb.isClaimed", false, "revisar el estado del reclamo de USB"),
+        USB_SEND_DATA("usb.sendData", true, "usar un dispositivo USB"),
+        USB_READ_DATA("usb.readData", true, "usar un dispositivo USB"),
+        USB_OPEN_STREAM("usb.openStream", true, "usar un dispositivo USB"),
+        USB_CLOSE_STREAM("usb.closeStream", false, "usar un dispositivo USB"),
         USB_RELEASE_DEVICE("usb.releaseDevice", false, "release a USB device"),
 
         HID_LIST_DEVICES("hid.listDevices", true, "access USB devices"),
         HID_START_LISTENING("hid.startListening", true, "listen for USB devices"),
         HID_STOP_LISTENING("hid.stopListening", false),
-        HID_CLAIM_DEVICE("hid.claimDevice", true, "claim a USB device"),
+        HID_CLAIM_DEVICE("hid.claimDevice", true, "reclamar un dispositivo USB"),
         HID_CLAIMED("hid.isClaimed", false, "check USB claim status"),
-        HID_SEND_DATA("hid.sendData", true, "use a USB device"),
-        HID_READ_DATA("hid.readData", true, "use a USB device"),
-        HID_OPEN_STREAM("hid.openStream", true, "use a USB device"),
-        HID_CLOSE_STREAM("hid.closeStream", false, "use a USB device"),
-        HID_RELEASE_DEVICE("hid.releaseDevice", false, "release a USB device"),
+        HID_SEND_DATA("hid.sendData", true, "usar un dispositivo USB"),
+        HID_READ_DATA("hid.readData", true, "usar un dispositivo USB"),
+        HID_OPEN_STREAM("hid.openStream", true, "usar un dispositivo USB"),
+        HID_CLOSE_STREAM("hid.closeStream", false, "usar un dispositivo USB"),
+        HID_RELEASE_DEVICE("hid.releaseDevice", false, "soltar un dispositivo USB"),
 
         FILE_LIST("file.list", true, "view the filesystem"),
         FILE_START_LISTENING("file.startListening", true, "listen for filesystem events"),
@@ -102,7 +102,7 @@ public class PrintSocketClient {
         private boolean dialogShown;
 
         Method(String callName, boolean dialogShown) {
-            this(callName, dialogShown, "access local resources");
+            this(callName, dialogShown, "acceder a recursos locales");
         }
 
         Method(String callName, boolean dialogShown, String dialogPrompt) {
@@ -135,7 +135,7 @@ public class PrintSocketClient {
     @OnWebSocketConnect
     public void onConnect(Session session) {
         log.info("Connection opened from {} on socket port {}", session.getRemoteAddress(), session.getLocalAddress().getPort());
-        trayManager.displayInfoMessage("Client connected");
+        trayManager.displayInfoMessage("Cliente conectado");
 
         //new connections are unknown until they send a proper certificate
         openConnections.put(session.getRemoteAddress().getPort(), new SocketConnection(Certificate.UNKNOWN));
@@ -144,7 +144,7 @@ public class PrintSocketClient {
     @OnWebSocketClose
     public void onClose(Session session, int closeCode, String reason) {
         log.info("Connection closed: {} - {}", closeCode, reason);
-        trayManager.displayInfoMessage("Client disconnected");
+        trayManager.displayInfoMessage("Cliente desconectado");
 
         Integer port = session.getRemoteAddress().getPort();
         SocketConnection closed = openConnections.remove(port);
@@ -204,11 +204,11 @@ public class PrintSocketClient {
                     request.markNewConnection(Certificate.UNKNOWN);
                 }
 
-                if (allowedFromDialog(request, "connect to " + Constants.ABOUT_TITLE,
+                if (allowedFromDialog(request, "conectarse a " + Constants.ABOUT_TITLE,
                                       findDialogPosition(session, json.optJSONObject("position")))) {
                     sendResult(session, UID, null);
                 } else {
-                    sendError(session, UID, "Connection blocked by client");
+                    sendError(session, UID, "Conexión bloqueada por el cliente");
                     session.disconnect();
                 }
 
@@ -281,14 +281,14 @@ public class PrintSocketClient {
             if (pr != null) {
                 prompt = String.format(prompt, pr.optString("name", pr.optString("file", pr.optString("host", "an undefined location"))));
             } else {
-                sendError(session, UID, "A printer must be specified before printing");
+                sendError(session, UID, "Una impresora debe estar especificada antes de imprimir");
                 return;
             }
         }
 
         if (call.isDialogShown()
                 && !allowedFromDialog(request, prompt, findDialogPosition(session, json.optJSONObject("position")))) {
-            sendError(session, UID, "Request blocked");
+            sendError(session, UID, "Petición denegada");
             return;
         }
 
@@ -308,7 +308,7 @@ public class PrintSocketClient {
                     if (name != null) {
                         sendResult(session, UID, name);
                     } else {
-                        sendError(session, UID, "Specified printer could not be found.");
+                        sendError(session, UID, "La impresora especificada no se pudo hallar.");
                     }
                 } else {
                     JSONArray services = PrintServiceMatcher.getPrintersJSON();
@@ -443,7 +443,7 @@ public class PrintSocketClient {
                     if (device.isOpen()) {
                         sendResult(session, UID, null);
                     } else {
-                        sendError(session, UID, "Failed to open connection to device");
+                        sendError(session, UID, "No se pudo abrir una conexión al dispositivo");
                     }
                 } else {
                     sendError(session, UID, String.format("USB Device [v:%s p:%s] is already claimed.", params.opt("vendorId"), params.opt("productId")));

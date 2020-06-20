@@ -62,9 +62,9 @@ public class GatewayDialog extends JDialog implements Themeable {
         descriptionPanel.setBorder(new EmptyBorder(3, 3, 3, 3));
 
         optionsPanel = new JPanel();
-        allowButton = new JButton("Allow", iconCache.getIcon(IconCache.Icon.ALLOW_ICON));
+        allowButton = new JButton("Permitir", iconCache.getIcon(IconCache.Icon.ALLOW_ICON));
         allowButton.setMnemonic(KeyEvent.VK_A);
-        blockButton = new JButton("Block", iconCache.getIcon(IconCache.Icon.BLOCK_ICON));
+        blockButton = new JButton("Denegar", iconCache.getIcon(IconCache.Icon.BLOCK_ICON));
         blockButton.setMnemonic(KeyEvent.VK_B);
         allowButton.addActionListener(buttonAction);
         blockButton.addActionListener(buttonAction);
@@ -77,13 +77,13 @@ public class GatewayDialog extends JDialog implements Themeable {
             JOptionPane.showMessageDialog(
                     GatewayDialog.this,
                     detailsDialog,
-                    "Details",
+                    "Detalles",
                     JOptionPane.PLAIN_MESSAGE);
         });
 
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        persistentCheckBox = new JCheckBox("Remember this decision", false);
+        persistentCheckBox = new JCheckBox("Recordar esta decisión", false);
         persistentCheckBox.setMnemonic(KeyEvent.VK_R);
         persistentCheckBox.addActionListener(e -> allowButton.setEnabled(!persistentCheckBox.isSelected() || request.isVerified()));
         persistentCheckBox.setAlignmentX(RIGHT_ALIGNMENT);
@@ -127,8 +127,8 @@ public class GatewayDialog extends JDialog implements Themeable {
 
             // Require confirmation for permanent block
             if (!approved && persistentCheckBox.isSelected()) {
-                ConfirmDialog confirmDialog = new ConfirmDialog(null, "Please Confirm", iconCache);
-                String message = Constants.BLACK_LIST.replace(" blocked ", " block ") + "?";
+                ConfirmDialog confirmDialog = new ConfirmDialog(null, "Confirme por favor", iconCache);
+                String message = Constants.BLACK_LIST.replace("Se le denegó", "¿Denegar") + "?";
                 message = String.format(message, request.hasCertificate()? request.getCertName():"");
                 if (!confirmDialog.prompt(message)) {
                     return;
@@ -145,7 +145,7 @@ public class GatewayDialog extends JDialog implements Themeable {
                                              String.format(description, "<p>" + request.getCertName()) +
                                              "</p><strong>" + request.getValidityInfo() + "</strong>" +
                                              "</html>");
-            certInfoLabel.setText("View request details");
+            certInfoLabel.setText("Ver detalles de la petición");
 
             IconCache.Icon trustIcon;
             Color detailColor = Constants.TRUSTED_COLOR;

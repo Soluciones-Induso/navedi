@@ -93,34 +93,46 @@ public class Certificate {
     static {
         try {
             Security.addProvider(new BouncyCastleProvider());
-            checkOverrideCertPath();
+            // No permitir certificados alternos
+            // checkOverrideCertPath();
 
             if (trustedRootCert == null) {
-                trustedRootCert = new Certificate("-----BEGIN CERTIFICATE-----\n" +
-                                                          "MIIELzCCAxegAwIBAgIJALm151zCHDxiMA0GCSqGSIb3DQEBCwUAMIGsMQswCQYD\n" +
-                                                          "VQQGEwJVUzELMAkGA1UECAwCTlkxEjAQBgNVBAcMCUNhbmFzdG90YTEbMBkGA1UE\n" +
-                                                          "CgwSUVogSW5kdXN0cmllcywgTExDMRswGQYDVQQLDBJRWiBJbmR1c3RyaWVzLCBM\n" +
-                                                          "TEMxGTAXBgNVBAMMEHF6aW5kdXN0cmllcy5jb20xJzAlBgkqhkiG9w0BCQEWGHN1\n" +
-                                                          "cHBvcnRAcXppbmR1c3RyaWVzLmNvbTAgFw0xNTAzMDEyMzM4MjlaGA8yMTE1MDMw\n" +
-                                                          "MjIzMzgyOVowgawxCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJOWTESMBAGA1UEBwwJ\n" +
-                                                          "Q2FuYXN0b3RhMRswGQYDVQQKDBJRWiBJbmR1c3RyaWVzLCBMTEMxGzAZBgNVBAsM\n" +
-                                                          "ElFaIEluZHVzdHJpZXMsIExMQzEZMBcGA1UEAwwQcXppbmR1c3RyaWVzLmNvbTEn\n" +
-                                                          "MCUGCSqGSIb3DQEJARYYc3VwcG9ydEBxemluZHVzdHJpZXMuY29tMIIBIjANBgkq\n" +
-                                                          "hkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuWsBa6uk+RM4OKBZTRfIIyqaaFD71FAS\n" +
-                                                          "7kojAQ+ySMpYuqLjIVZuCh92o1FGBvyBKUFc6knAHw5749yhLCYLXhzWwiNW2ri1\n" +
-                                                          "Jwx/d83Wnaw6qA3lt++u3tmiA8tsFtss0QZW0YBpFsIqhamvB3ypwu0bdUV/oH7g\n" +
-                                                          "/s8TFR5LrDfnfxlLFYhTUVWuWzMqEFAGnFG3uw/QMWZnQgkGbx0LMcYzdqFb7/vz\n" +
-                                                          "rTSHfjJsisUTWPjo7SBnAtNYCYaGj0YH5RFUdabnvoTdV2XpA5IPYa9Q597g/M0z\n" +
-                                                          "icAjuaK614nKXDaAUCbjki8RL3OK9KY920zNFboq/jKG6rKW2t51ZQIDAQABo1Aw\n" +
-                                                          "TjAdBgNVHQ4EFgQUA0XGTcD6jqkL2oMPQaVtEgZDqV4wHwYDVR0jBBgwFoAUA0XG\n" +
-                                                          "TcD6jqkL2oMPQaVtEgZDqV4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOC\n" +
-                                                          "AQEAijcT5QMVqrWWqpNEe1DidzQfSnKo17ZogHW+BfUbxv65JbDIntnk1XgtLTKB\n" +
-                                                          "VAdIWUtGZbXxrp16NEsh96V2hjDIoiAaEpW+Cp6AHhIVgVh7Q9Knq9xZ1t6H8PL5\n" +
-                                                          "QiYQKQgJ0HapdCxlPKBfUm/Mj1ppNl9mPFJwgHmzORexbxrzU/M5i2jlies+CXNq\n" +
-                                                          "cvmF2l33QNHnLwpFGwYKs08pyHwUPp6+bfci6lRvavztgvnKroWWIRq9ZPlC0yVK\n" +
-                                                          "FFemhbCd7ZVbrTo0NcWZM1PTAbvlOikV9eh3i1Vot+3dJ8F27KwUTtnV0B9Jrxum\n" +
-                                                          "W9P3C48mvwTxYZJFOu0N9UBLLg==\n" +
-                                                          "-----END CERTIFICATE-----");
+                trustedRootCert = new Certificate(
+                    "-----BEGIN CERTIFICATE-----\n" +
+                    "MIIGEDCCA/igAwIBAgIJAJwgopdZP668MA0GCSqGSIb3DQEBCwUAMIGUMQswCQYD\n" +
+                    "VQQGEwJDUjETMBEGA1UECAwKUHVudGFyZW5hczEaMBgGA1UECgwRU29sdWNpb25l\n" +
+                    "cyBJbmR1c28xMDAuBgNVBAsMJ1NvbHVjaW9uZXMgSW5kdXNvIENlcnRpZmljYXRl\n" +
+                    "IEF1dGhvcml0eTEiMCAGA1UEAwwZU29sdWNpb25lcyBJbmR1c28gUm9vdCBDQTAe\n" +
+                    "Fw0xOTA2MDQyMjIzNDJaFw0zOTA1MzAyMjIzNDJaMIGUMQswCQYDVQQGEwJDUjET\n" +
+                    "MBEGA1UECAwKUHVudGFyZW5hczEaMBgGA1UECgwRU29sdWNpb25lcyBJbmR1c28x\n" +
+                    "MDAuBgNVBAsMJ1NvbHVjaW9uZXMgSW5kdXNvIENlcnRpZmljYXRlIEF1dGhvcml0\n" +
+                    "eTEiMCAGA1UEAwwZU29sdWNpb25lcyBJbmR1c28gUm9vdCBDQTCCAiIwDQYJKoZI\n" +
+                    "hvcNAQEBBQADggIPADCCAgoCggIBAMxR58agL4N8/NP24iwA550ort03vXAexBxf\n" +
+                    "aRkhIowIBzMc5e+v1BvQGXI6tEKQ6S6YOZ7AhpBUMB2ClxgIcd1hvtf8xMz1U+uZ\n" +
+                    "DNqQU/u7iTP063j591QL2EHPxS3mTpMEhPBi5O9oby/5xfJJxv4brDud60vyBo1C\n" +
+                    "SZPPWT3h59L4/GRrKuDeZJfyu2y70juHkQBkQaTNZ7n9xkcBl8kiPnyVconnnq1X\n" +
+                    "cpk3JryF1OkcZh39s6NFsxPIo18k1pUjwHNl0v6eBvNYCLbVqA5O/GGl3aKMgIGE\n" +
+                    "0F7OMaabWXuSLldcZfX48dDBJQCOMYbrJnOsnWC0XZqGWIE8ltKyohhJglUkOxlu\n" +
+                    "2TWrEENxWVs4m4g/6OCL+x9v7pd5IXTegUbSPMaC1OaGjDX1jAukT4oPMiiIw4TW\n" +
+                    "zxvgZrympg+kuu+Ut9U5HMRlIFHnuce8/PVGbxTB6YPsx2CVV3Yj46Xis1PjLVPe\n" +
+                    "CternG/OrdKbYqlYkW3XjtIDMaFMLKt61+Mfryh11KTobD7Dp+Np3tN99Z1EQfb6\n" +
+                    "Y+CVObC+Nzozr2fghWM8i50B7CS6OQbT8MhHV7HBfNjbaHSGVaLYOqJws5qpBTa1\n" +
+                    "az3LaB0E0kMn43jJt9XwafSJCA3zy25nwy8Y+Gia5pC+zbSs4k5rWoULYDLbRmZq\n" +
+                    "9rdjuj/BAgMBAAGjYzBhMB0GA1UdDgQWBBQQKRVaFa0lvH382AS/YidOYMWWhzAf\n" +
+                    "BgNVHSMEGDAWgBQQKRVaFa0lvH382AS/YidOYMWWhzAPBgNVHRMBAf8EBTADAQH/\n" +
+                    "MA4GA1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCAgEArqc+OsHXqUUooDhU\n" +
+                    "aYPtcCGGjTOOcmD5SY4/tGvbV+//gKhX9D9d3l05SYIY7RlAm58IcvAnE4reONPZ\n" +
+                    "xpw1qv5RNQHLKx6QAeqPzDmn94JnaAh4PhZqVdlum61CNAaAfWK+sL0iFpOliDmY\n" +
+                    "0g0ybnTsr5OUolAN5iMbas+Gy2sNAnSJ//+cC4aoAEF+AwbmwjbB2ENTlupQPHCv\n" +
+                    "kSrM95XaPsFNPmjsWtY74CfH9JH4cPPV71bgfWR47hUf0FXF1S/dLA9fuzLaYS+b\n" +
+                    "5VwnZqcJ2lYAgJ8J3YwnvoJqZszmJwTFROGB5n034QHs43GjV3ViYUsVfSf8SKdr\n" +
+                    "5FdGkJuUoVjWmZG/OU9/aF4oH1nGpMpqVsJ6nIRlqoFsFFDdm7kamNLnNfJ/AhgQ\n" +
+                    "7fAV+56q860O/nG9vfndZqMbFyjSReJPRQt/tAMyigN/dKR/gOy880OxEiAFGxL8\n" +
+                    "VV4Q26J2PAjJ6Nqf/tXdZ34DMMLSqUF48/axYdtNx9yG9Lwb5wfucRFnHJdOcLsq\n" +
+                    "P9Yoq6ElItezma1VsQ3XdGLrAFmkfD/i2W0l9/eBrlwJ1WcT1CaSvjzqrutLBmtH\n" +
+                    "FJQdG5R6ijuBynS24zLGuw3CreTwZp3mAhB8LMBXSZIF6CaY90nEfvXD/mQqD5Kq\n" +
+                    "CofHmMemvWibVJrNh+62l05R+Gg=n" +
+                    "-----END CERTIFICATE-----");
 
                 CRL.getInstance();  // Fetch the CRL
             }

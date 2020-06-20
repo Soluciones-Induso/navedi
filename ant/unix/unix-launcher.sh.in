@@ -23,11 +23,11 @@ SUCCESS="   [${GREEN}success${PLAIN}]"
 FAILURE="   [${RED}failure${PLAIN}]"
 WARNING="   [${YELLOW}warning${PLAIN}]"
 
-echo "Looking for Java..."
+echo "Buscando Java..."
 
 # Honor JAVA_HOME
 if [ -n "$JAVA_HOME" ]; then
-    echo -e "$WARNING JAVA_HOME was detected, using $JAVA_HOME..."
+    echo -e "$WARNING JAVA_HOME fue detectado, utilizando $JAVA_HOME..."
     PATH="$JAVA_HOME/bin:$PATH"
 fi
 
@@ -60,7 +60,7 @@ else
 fi
 
 # Make sure Java version is sufficient
-echo "Verifying the Java version is $JAVA_MIN+..."
+echo "Verificando que la versión de Java es $JAVA_MIN+..."
 curver=$(java -version 2>&1 | grep -i version | awk -F"\"" '{ print $2 }' | awk -F"." '{ print $1 "." $2 }')
 minver="$JAVA_MIN"
 if [ -z "$curver" ]; then
@@ -69,15 +69,15 @@ fi
 desired=$(echo -e "$minver\n$curver")
 actual=$(echo "$desired" |sort -t '.' -k 1,1 -k 2,2 -n)
 if [ "$desired" != "$actual" ]; then
-    echo -e "$FAILURE Please install Java $JAVA_MIN or higher to continue"
+    echo -e "$FAILURE Por favor instale la versión $JAVA_MIN o superior de Java antes de continuar"
     exit 1
 else
-    echo -e "$SUCCESS Java $curver was detected"
+    echo -e "$SUCCESS Java $curver fue detectado"
 fi
 
 
 if command -v java &>/dev/null; then
-    echo -e "$ABOUT_TITLE is starting..."
+    echo -e "$ABOUT_TITLE está comenzando..."
     if [[ "$OSTYPE" == "darwin"* ]]; then
         if [ -f "$PROPS_FILE.jar" ]; then
             prefix="" # aside launcher, e.g. preinstall
@@ -89,7 +89,7 @@ if command -v java &>/dev/null; then
         java $LAUNCH_OPTS -jar "$PROPS_FILE.jar" "$@"
     fi
 else
-    echo -e "$FAILURE Java $JAVA_MIN+ was not found"
+    echo -e "$FAILURE Java $JAVA_MIN+ no fue hallado"
 fi
 
 popd &>/dev/null

@@ -9,13 +9,13 @@ import java.util.Arrays;
 public class RequestState {
 
     public enum Validity {
-        TRUSTED("Valid"),
-        EXPIRED("Expired Signature"),
-        UNSIGNED("Invalid Signature"),
-        EXPIRED_CERT("Expired Certificate"),
-        FUTURE_CERT("Future Certificate"),
-        INVALID_CERT("Invalid Certificate"),
-        UNKNOWN("Invalid");
+        TRUSTED("Válido"),
+        EXPIRED("Firma expirada"),
+        UNSIGNED("Firma inválida"),
+        EXPIRED_CERT("Certificado expirado"),
+        FUTURE_CERT("Certificado futuro"),
+        INVALID_CERT("Certificado inválido"),
+        UNKNOWN("Inválido");
 
         private String formatted;
 
@@ -86,7 +86,9 @@ public class RequestState {
     }
 
     public boolean hasSavedCert() {
-        return isVerified() && certUsed.isSaved();
+        // return isVerified() && certUsed.isSaved();
+        // Solamente conexiones oficiales sales verificadas
+        return isVerified();
     }
 
     public boolean hasBlockedCert() {

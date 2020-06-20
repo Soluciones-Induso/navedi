@@ -121,7 +121,7 @@ public class SiteManagerDialog extends BasicDialog implements Runnable {
         });
 
         // TODO:  Add certificate manual import capabilities
-        deleteButton = addPanelButton("Delete", IconCache.Icon.DELETE_ICON, KeyEvent.VK_D);
+        deleteButton = addPanelButton("Eliminar", IconCache.Icon.DELETE_ICON, KeyEvent.VK_D);
         deleteButton.addActionListener(e -> {
             deleteCertificate.set(getSelectedCertificate());
             deleteButton.setEnabled(false);
@@ -212,7 +212,7 @@ public class SiteManagerDialog extends BasicDialog implements Runnable {
         if (certificate != null && FileUtilities.deleteFromFile(certList.getTag().toString(), certificate.getCert().data())) {
             certList.remove(certificate);
         } else {
-            log.warn("Error removing {} from the list of {} sites", certificate, getSelectedTabName().toLowerCase(Locale.ENGLISH));
+            log.warn("Error removiendo {} de la lista de {} sitios", certificate, getSelectedTabName().toLowerCase(Locale.ENGLISH));
         }
 
         return this;

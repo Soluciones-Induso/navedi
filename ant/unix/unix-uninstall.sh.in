@@ -4,7 +4,7 @@
 set -e
 
 if [ "$(id -u)" != "0" ]; then
-   echo "This script must be run with root (sudo) privileges" 1>&2
+   echo "Este programa necesita ser ejecutado con privilegios de super usuario (sudo)" 1>&2
    exit 1
 fi
 
@@ -12,15 +12,15 @@ fi
 DIR=$(cd "$(dirname "$0")" && pwd)
 pushd "$DIR"
 
-echo "Running uninstall tasks..."
+echo "Ejecutando tareas de desintalación..."
 if [[ "$OSTYPE" == "darwin"* ]]; then
     "$DIR/Contents/MacOS/${project.name}" uninstall
 else
     "$DIR/${project.filename}" uninstall
 fi
 
-echo "Deleting files..."
+echo "Eliminando archivos..."
 rm -rf "$DIR"
-echo -e "\nUninstall of ${project.name} complete.\n"
+echo -e "\nDesinstalación de ${project.name} completo.\n"
 
 popd &>/dev/null

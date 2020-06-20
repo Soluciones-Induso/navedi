@@ -4,11 +4,11 @@
 set -e
 
 
-echo -e "Cleanup is complete.  Removing ${linux.installdir}..."
+echo -e "Se completó la limpieza.  Removiendo ${linux.installdir}..."
 rm -rf "${linux.installdir}"
 if [ $? -eq 0 ]; then
     echo -e "${bash.success}"
 fi
 
-echo -e "Finished.\n"
+echo -e "Completado.\n"
 exit 0
